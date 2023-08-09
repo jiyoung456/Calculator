@@ -11,6 +11,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -100,12 +101,13 @@ public class MyCalc extends JFrame {
             bt[22] = new JButton(".");
             bt[23] = new JButton("=");
 
-            for(int i = 0; i <= 23; ++i) {
+            for(int i = 0; i <= 23; i++) {
                 bt[i].setPreferredSize(new Dimension(0, 65));
                 bt[i].setFont(new Font("맑은 고딕", 0, 20));
                 bt[i].setForeground(Color.BLACK);
                 bt[i].setBackground(Color.white);
-                if (7 < i && i < 19 && i % 4 != 3) {
+
+                if (i == 8 || i == 9 || i == 10 ||i == 12 || i == 13 || i == 14 ||i == 16 || i == 17 || i == 18) {
                     bt[i].addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
                             JButton b = (JButton)e.getSource();
@@ -138,7 +140,7 @@ public class MyCalc extends JFrame {
                             String text = b.getText();
                             String newtext = labeltext + text;
                             if (labeltext == "0") {
-                                MyCalc.label.setText("0");
+                                MyCalc.label.setText(text);
                             } else {
                                 MyCalc.label.setText(newtext);
                             }
@@ -148,7 +150,7 @@ public class MyCalc extends JFrame {
                 } else if (i == 23) {
                     bt[i].setBackground(new Color(0, 103, 192));
                     bt[i].addActionListener(MyCalc.this.new Result());
-                } else if (i % 4 == 3 || i < 7 || 19 < i) {
+                } else if (i ==3 ||i ==7  ||i ==11 ||i ==15 ||i ==19 ||i ==1 || i == 2 ||i ==0 ||i ==4 || i ==5 ||i ==6 || i ==20) { //i % 4 == 3 || i < 7 || 19 < i
                     bt[i].setBackground(new Color(238, 238, 238));
                     if (i == 2) {
                         bt[i].addActionListener(new ActionListener() {
@@ -204,6 +206,7 @@ public class MyCalc extends JFrame {
     public class Result implements ActionListener {
         public Result() {
         }
+        DecimalFormat df = new DecimalFormat("#.##########");
 
         public void actionPerformed(ActionEvent e) {
             JButton b = (JButton)e.getSource();
@@ -211,8 +214,9 @@ public class MyCalc extends JFrame {
             String text = b.getText();
             String newtext = labeltext + text;
             int n = newtext.length();
-            if (text != "x²") {
-                MyCalc.this.num = Double.parseDouble(MyCalc.label.getText().substring(0, n - 1));
+
+            if (!text.equals("x²") && !text.equals("1/x") && !text.equals("2√x")) {
+                num = Double.parseDouble(label.getText().substring(0, n - 1));
             }
 
             MyCalc var10000;
@@ -254,54 +258,66 @@ public class MyCalc extends JFrame {
                 }
             }
 
-            if (text == "x²") {
-                MyCalc.this.num = Double.parseDouble(MyCalc.label.getText().substring(0, n - 2));
-                MyCalc.this.math = "";
-                if (MyCalc.info.getText() == "") {
-                    MyCalc.this.result = (double)Math.round(Math.pow(MyCalc.this.num, 2.0) * 1.0E9) / 1.0E9;
-                    if (MyCalc.this.result % 1.0 == 0.0) {
-                        MyCalc.info.setText("sqr(" + (int)MyCalc.this.num + ")");
-                        MyCalc.label.setText(String.valueOf((int)MyCalc.this.result));
-                    } else {
-                        MyCalc.info.setText("sqr(" + MyCalc.this.num + ")");
-                        MyCalc.label.setText(String.valueOf(MyCalc.this.result));
+            if (text.equals("x²")) {
+                num = Double.parseDouble(label.getText().substring(0, n - 2));
+                math = "";
+                if (info.getText().equals("")) {
+                    result = (Math.round((Math.pow(num, 2))*1000000000)/1000000000.0);
+                    if(result % 1 == 0) {
+                        info.setText("sqr(" + (int) num + ")");
+                        label.setText(String.valueOf((int) result));
+                    }else {
+                        info.setText("sqr(" + num + ")");
+                        label.setText(String.valueOf(result));
                     }
-                } else if (MyCalc.this.result % 1.0 == 0.0) {
-                    MyCalc.info.setText("sqr(" + (int)MyCalc.this.result + ")");
-                    MyCalc.this.result = (double)Math.round(Math.pow(MyCalc.this.result, 2.0) * 1.0E9) / 1.0E9;
-                    MyCalc.label.setText(String.valueOf((int)MyCalc.this.result));
-                } else {
-                    MyCalc.info.setText("sqr(" + MyCalc.this.result + ")");
-                    MyCalc.this.result = (double)Math.round(Math.pow(MyCalc.this.result, 2.0) * 1.0E9) / 1.0E9;
-                    MyCalc.label.setText(String.valueOf(MyCalc.this.result));
+                }else {
+                    if(result % 1 == 0) {
+                        info.setText("sqr(" + (int) result + ")");
+                        result = (Math.round((Math.pow(result, 2))*1000000000)/1000000000.0);
+                        label.setText(String.valueOf((int) result));
+                    }else {
+                        info.setText("sqr(" + result + ")");
+                        result = (Math.round((Math.pow(result, 2))*1000000000)/1000000000.0);
+                        label.setText(String.valueOf(result));
+                    }
                 }
             }
+
+
+            else if (text.equals("2√x")) {
+                num = Double.parseDouble(label.getText());
+                math = "";
+                if (info.getText().equals("")) {
+
+                    result = (Math.round((Math.sqrt(num))*1000000000)/1000000000.0);
+                    if(result % 1 == 0) {
+                       info.setText("√(" + (int) num + ")");
+                        label.setText(String.valueOf((int) result));
+                    }else {
+                        info.setText("√(" + num + ")");
+                        label.setText(String.valueOf(result));
+                    }
+                }else {
+                    if(Math.sqrt(result) % 1 == 0) {
+                        info.setText("√(" + (int) result + ")");
+                        result = (Math.round((Math.sqrt(result))*1000000000)/1000000000.0);
+                        label.setText(String.valueOf((int) result));
+                    }else {
+                        info.setText("√(" + result + ")");
+                        result = (Math.round((Math.sqrt(result))*1000000000)/1000000000.0);
+                        label.setText(String.valueOf(result));
+                    }
+                }
+            }
+
+
+
 
             else if (text.equals("1/x")) {
-
-
-            }
-            if (text == "2√x") {
-                MyCalc.this.math = "";
-                if (MyCalc.info.getText() == "") {
-                    MyCalc.this.result = (double)Math.round(Math.sqrt(MyCalc.this.num) * 1.0E9) / 1.0E9;
-                    if (MyCalc.this.result % 1.0 == 0.0) {
-                        MyCalc.info.setText("sqrt(" + (int)MyCalc.this.num + ")");
-                        MyCalc.label.setText(String.valueOf((int)MyCalc.this.result));
-                    } else {
-                        MyCalc.info.setText("sqrt(" + MyCalc.this.num + ")");
-                        MyCalc.label.setText(String.valueOf(MyCalc.this.result));
-                    }
-                } else if (Math.sqrt(MyCalc.this.result) % 1.0 == 0.0) {
-                    MyCalc.info.setText("sqrt(" + (int)MyCalc.this.result + ")");
-                    MyCalc.this.result = (double)Math.round(Math.sqrt(MyCalc.this.result) * 1.0E9) / 1.0E9;
-                    MyCalc.label.setText(String.valueOf((int)MyCalc.this.result));
-                } else {
-                    MyCalc.info.setText("sqrt(" + MyCalc.this.result + ")");
-                    MyCalc.this.result = (double)Math.round(Math.sqrt(MyCalc.this.result) * 1.0E9) / 1.0E9;
-                    MyCalc.label.setText(String.valueOf(MyCalc.this.result));
                 }
-            }
+
+
+
 
             if (text == "=") {
                 MyCalc.this.math = "";
