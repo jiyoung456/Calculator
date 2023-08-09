@@ -107,7 +107,7 @@ public class MyCalc extends JFrame {
                 bt[i].setForeground(Color.BLACK);
                 bt[i].setBackground(Color.white);
 
-                if (i == 8 || i == 9 || i == 10 ||i == 12 || i == 13 || i == 14 ||i == 16 || i == 17 || i == 18) {
+                if (7 < i && i < 19 && i%4 != 3) { //(i == 8 || i == 9 || i == 10 ||i == 12 || i == 13 || i == 14 ||i == 16 || i == 17 || i == 18)
                     bt[i].addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
                             JButton b = (JButton)e.getSource();
@@ -263,27 +263,39 @@ public class MyCalc extends JFrame {
         private void calculateInverse() {
             num = Double.parseDouble(label.getText());
             math = "";
-            if (info.getText().equals("")) {
-                result = 1/num;
-                if(result % 1 == 0) {
-                    info.setText("1/(" + (int) num +")" );
-                    label.setText(String.valueOf((int) result));
-                }else {
-                    info.setText("1/(" + num +")");
-                    label.setText(String.valueOf(result));
+
+            if (num == 0) {
+                info.setText("Cannot divide by zero");
+                label.setText("Error");
+            } else {
+
+                if (info.getText().equals("")) {
+
+                    result = (((1 / num) * 1000000000) / 1000000000.0);
+                    if (result % 1 == 0) {
+                        info.setText("1/(" + (int) num + ")");
+                        label.setText(String.valueOf((int) result));
+                    } else {
+                        info.setText("1/(" + num + ")");
+                        label.setText(String.valueOf(result));
+                    }
+                } else {
+                    if (result % 1 == 0) {
+                        info.setText("1/(" + (int) result + ")");
+                        result = (((1 / result) * 1000000000) / 1000000000.0);
+                        label.setText(String.valueOf((int) result));
+                    } else {
+                        info.setText("1/(" + result + ")");
+                        result = (((1 / result) * 1000000000) / 1000000000.0);
+                        label.setText(String.valueOf(result));
+                    }
                 }
-            }else {
-                if(result % 1 == 0) {
-                    info.setText("1/(" + (int) result +")");
-                    result = (((1/result)*1000000000)/1000000000.0);
-                    label.setText(String.valueOf((int) result));
-                }else {
-                    info.setText("1/(" + result +")");
-                    result = (((1/result)*1000000000)/1000000000.0);
-                    label.setText(String.valueOf(result));
-                }
+
             }
         }
+
+
+
 
         private void calculateNegation() {
             num = Double.parseDouble(label.getText());
@@ -327,11 +339,11 @@ public class MyCalc extends JFrame {
                 }
             } else {
                 if (percentage % 1 == 0) {
-                    info.setText((int) percentage + "%");
+                    info.setText((int) num + "%");
                     result = percentage;
                     label.setText(String.valueOf((int) percentage));
                 } else {
-                    info.setText(percentage + "%");
+                    info.setText(num + "%");
                     result = percentage;
                     label.setText(String.valueOf(percentage));
                 }
@@ -351,33 +363,34 @@ public class MyCalc extends JFrame {
             }
 
             MyCalc var10000;
-            if (MyCalc.this.math == "+") {
+            if (MyCalc.this.math.equals("+")) {
                 var10000 = MyCalc.this;
                 var10000.result += MyCalc.this.num;
                 MyCalc.this.math = "";
-            } else if (MyCalc.this.math == "-") {
+            } else if (MyCalc.this.math.equals("-")) {
                 var10000 = MyCalc.this;
                 var10000.result -= MyCalc.this.num;
                 MyCalc.this.math = "";
-            } else if (MyCalc.this.math == "×") {
+            } else if (MyCalc.this.math.equals("×")) {
                 var10000 = MyCalc.this;
                 var10000.result *= MyCalc.this.num;
                 MyCalc.this.math = "";
-            } else if (MyCalc.this.math == "÷") {
+            } else if (MyCalc.this.math.equals("÷") ) {
                 var10000 = MyCalc.this;
                 var10000.result /= MyCalc.this.num;
-                MyCalc.this.math = "";
+                MyCalc.this.math.equals("");
             }
 
-            if (MyCalc.this.math == "") {
+            if (MyCalc.this.math.equals("")) {
                 MyCalc.this.math = b.getText();
             }
 
-            if (MyCalc.info.getText() == "" && text != "x²" && text != "=") {
+
+            if (MyCalc.info.getText() == "" && !text.equals("=") && !text.equals("x²") && !text.equals("1/x") && !text.equals("2√x") && (!text.equals("+/-")) && !text.equals("%")) {
                 MyCalc.info.setText(newtext);
                 MyCalc.this.result = MyCalc.this.num;
                 MyCalc.label.setText("0");
-            } else if (MyCalc.info.getText() != "" && text != "x²" && text != "=") {
+            } else if (MyCalc.info.getText() != "" && !text.equals("=") && !text.equals("x²") && !text.equals("1/x") && !text.equals("2√x") && (!text.equals("+/-")) && !text.equals("%")) {
                 MyCalc.this.result = (double)Math.round(MyCalc.this.result * 1.0E9) / 1.0E9;
                 if (MyCalc.this.result % 1.0 == 0.0) {
                     int var10001 = (int)MyCalc.this.result;
@@ -431,7 +444,7 @@ public class MyCalc extends JFrame {
                 calculatePercentage();
             }
 
-            if (text == "=") {
+            if (text.equals("=")) {
                 MyCalc.this.math = "";
                 if (MyCalc.info.getText() != "" && MyCalc.label.getText() != "" && !MyCalc.info.getText().contains(text)) {
                     JLabel var7;
