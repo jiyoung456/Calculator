@@ -139,7 +139,7 @@ public class MyCalc extends JFrame {
                             String labeltext = MyCalc.label.getText();
                             String text = b.getText();
                             String newtext = labeltext + text;
-                            if (labeltext == "0") {
+                            if (labeltext.equals("0")) {
                                 MyCalc.label.setText(text);
                             } else {
                                 MyCalc.label.setText(newtext);
@@ -147,10 +147,14 @@ public class MyCalc extends JFrame {
 
                         }
                     });
-                } else if (i == 23) {
+                }
+
+                else if (i == 23) {
                     bt[i].setBackground(new Color(0, 103, 192));
+                    bt[i].setForeground(Color.WHITE);
                     bt[i].addActionListener(MyCalc.this.new Result());
-                } else if (i ==3 ||i ==7  ||i ==11 ||i ==15 ||i ==19 ||i ==1 || i == 2 ||i ==0 ||i ==4 || i ==5 ||i ==6 || i ==20) { //i % 4 == 3 || i < 7 || 19 < i
+
+                }else if (i % 4 == 3 || i < 7 || 19 < i) { //i ==3 ||i ==7  ||i ==11 ||i ==15 ||i ==19 ||i ==1 || i == 2 ||i ==0 ||i ==4 || i ==5 ||i ==6 || i ==20
                     bt[i].setBackground(new Color(238, 238, 238));
                     if (i == 2) {
                         bt[i].addActionListener(new ActionListener() {
@@ -164,7 +168,23 @@ public class MyCalc extends JFrame {
                                 MyCalc.this.result = 0.0;
                             }
                         });
-                    } else if (i == 1) {
+                    }else if(i == 3) {
+                        bt[i].addActionListener(new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                String labeltext = MyCalc.label.getText();
+                                int n = labeltext.length();
+
+                                if (n > 0) {
+                                    MyCalc.label.setText(labeltext.substring(0, n - 1));
+                                }
+
+                                if (MyCalc.label.getText().isEmpty()) {
+                                    MyCalc.label.setText("0");
+                                }
+                            }
+                        });
+                    }
+                    else if (i == 1) {
                         bt[i].addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
                                 int n = MyCalc.label.getText().length();
@@ -184,9 +204,9 @@ public class MyCalc extends JFrame {
                                 JButton b = (JButton)e.getSource();
                                 String labeltext = MyCalc.label.getText();
                                 String text = b.getText();
-                                String newtext = labeltext + text;
-                                int n = newtext.length();
-                                if (!MyCalc.label.getText().contains(b.getText()) && n < 10) {
+
+                                if (!labeltext.contains(".")) {
+                                    String newtext = labeltext + text;
                                     MyCalc.label.setText(newtext);
                                 }
 
@@ -208,6 +228,117 @@ public class MyCalc extends JFrame {
         }
         DecimalFormat df = new DecimalFormat("#.##########");
 
+
+        private void calculateSquare() {
+
+        }
+
+
+        private void calculateRoot(){
+            num = Double.parseDouble(label.getText());
+            math = "";
+            if (info.getText().equals("")) {
+
+                result = (Math.round((Math.sqrt(num))*1000000000)/1000000000.0);
+                if(result % 1 == 0) {
+                    info.setText("√(" + (int) num + ")");
+                    label.setText(String.valueOf((int) result));
+                }else {
+                    info.setText("√(" + num + ")");
+                    label.setText(String.valueOf(result));
+                }
+            }else {
+                if(Math.sqrt(result) % 1 == 0) {
+                    info.setText("√(" + (int) result + ")");
+                    result = (Math.round((Math.sqrt(result))*1000000000)/1000000000.0);
+                    label.setText(String.valueOf((int) result));
+                }else {
+                    info.setText("√(" + result + ")");
+                    result = (Math.round((Math.sqrt(result))*1000000000)/1000000000.0);
+                    label.setText(String.valueOf(result));
+                }
+            }
+        }
+
+        private void calculateInverse() {
+            num = Double.parseDouble(label.getText());
+            math = "";
+            if (info.getText().equals("")) {
+                result = 1/num;
+                if(result % 1 == 0) {
+                    info.setText("1/(" + (int) num +")" );
+                    label.setText(String.valueOf((int) result));
+                }else {
+                    info.setText("1/(" + num +")");
+                    label.setText(String.valueOf(result));
+                }
+            }else {
+                if(result % 1 == 0) {
+                    info.setText("1/(" + (int) result +")");
+                    result = (((1/result)*1000000000)/1000000000.0);
+                    label.setText(String.valueOf((int) result));
+                }else {
+                    info.setText("1/(" + result +")");
+                    result = (((1/result)*1000000000)/1000000000.0);
+                    label.setText(String.valueOf(result));
+                }
+            }
+        }
+
+        private void calculateNegation() {
+            num = Double.parseDouble(label.getText());
+            math = "";
+
+            if (info.getText().equals("")) {
+                result = -num;
+                if (result % 1 == 0) {
+                    info.setText("negate(" + (int) num + ")");
+                    label.setText(String.valueOf((int) result));
+                } else {
+                    info.setText("negate(" + num + ")");
+                    label.setText(String.valueOf(result));
+                }
+            } else {
+                if (result % 1 == 0) {
+                    info.setText("negate(" + (int) result + ")");
+                    result = -result;
+                    label.setText(String.valueOf((int) result));
+                } else {
+                    info.setText("negate(" + result + ")");
+                    result = -result;
+                    label.setText(String.valueOf(result));
+                }
+            }
+        }
+
+        private void calculatePercentage() {
+            num = Double.parseDouble(label.getText());
+            math = "";
+
+            double percentage = num * 0.01;
+
+            if (info.getText().equals("")) {
+                if (percentage % 1 == 0) {
+                    info.setText((int) num + "%");
+                    label.setText(String.valueOf((int) percentage));
+                } else {
+                    info.setText(num + "%");
+                    label.setText(String.valueOf(percentage));
+                }
+            } else {
+                if (percentage % 1 == 0) {
+                    info.setText((int) percentage + "%");
+                    result = percentage;
+                    label.setText(String.valueOf((int) percentage));
+                } else {
+                    info.setText(percentage + "%");
+                    result = percentage;
+                    label.setText(String.valueOf(percentage));
+                }
+            }
+        }
+
+
         public void actionPerformed(ActionEvent e) {
             JButton b = (JButton)e.getSource();
             String labeltext = MyCalc.label.getText();
@@ -215,7 +346,7 @@ public class MyCalc extends JFrame {
             String newtext = labeltext + text;
             int n = newtext.length();
 
-            if (!text.equals("x²") && !text.equals("1/x") && !text.equals("2√x")) {
+            if (!text.equals("x²") && !text.equals("1/x") && !text.equals("2√x") && (!text.equals("+/-")) && !text.equals("%")) {
                 num = Double.parseDouble(label.getText().substring(0, n - 1));
             }
 
@@ -285,39 +416,20 @@ public class MyCalc extends JFrame {
 
 
             else if (text.equals("2√x")) {
-                num = Double.parseDouble(label.getText());
-                math = "";
-                if (info.getText().equals("")) {
-
-                    result = (Math.round((Math.sqrt(num))*1000000000)/1000000000.0);
-                    if(result % 1 == 0) {
-                       info.setText("√(" + (int) num + ")");
-                        label.setText(String.valueOf((int) result));
-                    }else {
-                        info.setText("√(" + num + ")");
-                        label.setText(String.valueOf(result));
-                    }
-                }else {
-                    if(Math.sqrt(result) % 1 == 0) {
-                        info.setText("√(" + (int) result + ")");
-                        result = (Math.round((Math.sqrt(result))*1000000000)/1000000000.0);
-                        label.setText(String.valueOf((int) result));
-                    }else {
-                        info.setText("√(" + result + ")");
-                        result = (Math.round((Math.sqrt(result))*1000000000)/1000000000.0);
-                        label.setText(String.valueOf(result));
-                    }
-                }
+                calculateRoot();
             }
 
-
-
-
             else if (text.equals("1/x")) {
-                }
+                calculateInverse();
+            }
 
+            else if (text.equals("+/-")) {
+                calculateNegation();
+            }
 
-
+            else if(text.equals("%")) {
+                calculatePercentage();
+            }
 
             if (text == "=") {
                 MyCalc.this.math = "";
