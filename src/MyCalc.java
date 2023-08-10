@@ -382,24 +382,24 @@ public class MyCalc extends JFrame {
                 var10000.result += MyCalc.this.num;
                 MyCalc.this.math.equals("");
                  */
+          /*  if (result % 1 == 0) {
+                result = result;
+            } else {
+                String formattedResult = String.format("%.10f", result);
+
+            }*/
 
             if (MyCalc.this.math.equals("+")) {
-                var10000 = MyCalc.this;
-                var10000.result += MyCalc.this.num;
-                MyCalc.this.math.equals("");
+                result += MyCalc.this.num;
             } else if (MyCalc.this.math.equals("-")) {
-                var10000 = MyCalc.this;
-                var10000.result -= MyCalc.this.num;
-                MyCalc.this.math.equals("");
+                result -= MyCalc.this.num;
             } else if (MyCalc.this.math.equals("×")) {
-                var10000 = MyCalc.this;
-                var10000.result *= MyCalc.this.num;
-                MyCalc.this.math.equals("");
-            } else if (MyCalc.this.math.equals("÷") ) {
-                var10000 = MyCalc.this;
-                var10000.result /= MyCalc.this.num;
-                MyCalc.this.math.equals("");
+                result *= MyCalc.this.num;
+            } else if (MyCalc.this.math.equals("÷")) {
+                result /= MyCalc.this.num;
             }
+
+            MyCalc.this.math = "";
 
             if (MyCalc.this.math.equals("")) {
                 MyCalc.this.math = b.getText();
