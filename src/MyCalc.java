@@ -107,7 +107,7 @@ public class MyCalc extends JFrame {
                 bt[i].setForeground(Color.BLACK);
                 bt[i].setBackground(Color.white);
 
-                if (7 < i && i < 19 && i%4 != 3) { //(i == 8 || i == 9 || i == 10 ||i == 12 || i == 13 || i == 14 ||i == 16 || i == 17 || i == 18)
+                if (7 < i && i < 19 && i%4 != 3) {
                     bt[i].addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
                             JButton b = (JButton)e.getSource();
@@ -154,7 +154,7 @@ public class MyCalc extends JFrame {
                     bt[i].setForeground(Color.WHITE);
                     bt[i].addActionListener(MyCalc.this.new Result());
 
-                }else if (i % 4 == 3 || i < 7 || 19 < i) { //i ==3 ||i ==7  ||i ==11 ||i ==15 ||i ==19 ||i ==1 || i == 2 ||i ==0 ||i ==4 || i ==5 ||i ==6 || i ==20
+                }else if (i % 4 == 3 || i < 7 || 19 < i) {
                     bt[i].setBackground(new Color(238, 238, 238));
                     if (i == 2) {
                         bt[i].addActionListener(new ActionListener() {
@@ -260,6 +260,10 @@ public class MyCalc extends JFrame {
             }
         }
 
+        /*
+ 0.2, 1+1, 1+1.1
+정수 입력값이 info에 실수로 출력(label 결과값이 실수라서)
+*/
         private void calculateInverse() {
             num = Double.parseDouble(label.getText());
             math = "";
@@ -273,13 +277,15 @@ public class MyCalc extends JFrame {
 
                     result = (((1 / num) * 1000000000) / 1000000000.0);
                     if (result % 1 == 0) {
-                        info.setText("1/(" + (int) num + ")");
+                       // info.setText("1/(" + (int) num + ")");
+                        info.setText("1/(" +  num + ")");
                         label.setText(String.valueOf((int) result));
                     } else {
                         info.setText("1/(" + num + ")");
                         label.setText(String.valueOf(result));
                     }
                 } else {
+
                     if (result % 1 == 0) {
                         info.setText("1/(" + (int) result + ")");
                         result = (((1 / result) * 1000000000) / 1000000000.0);
@@ -322,7 +328,10 @@ public class MyCalc extends JFrame {
                 }
             }
         }
-
+        /*
+2, 0.2, 1+1, 1+1.1
+정수 입력값이 info에 실수로 출력(label 결과값이 실수라서)
+*/
         private void calculatePercentage() {
             num = Double.parseDouble(label.getText());
             math = "";
@@ -363,18 +372,29 @@ public class MyCalc extends JFrame {
             }
 
             MyCalc var10000;
+
+
+
+
+
+            /*수정: 3줄 묶고 소수 10자리까지만 출력되는거도 추가
+            * var10000 = MyCalc.this;
+                var10000.result += MyCalc.this.num;
+                MyCalc.this.math.equals("");
+                 */
+
             if (MyCalc.this.math.equals("+")) {
                 var10000 = MyCalc.this;
                 var10000.result += MyCalc.this.num;
-                MyCalc.this.math = "";
+                MyCalc.this.math.equals("");
             } else if (MyCalc.this.math.equals("-")) {
                 var10000 = MyCalc.this;
                 var10000.result -= MyCalc.this.num;
-                MyCalc.this.math = "";
+                MyCalc.this.math.equals("");
             } else if (MyCalc.this.math.equals("×")) {
                 var10000 = MyCalc.this;
                 var10000.result *= MyCalc.this.num;
-                MyCalc.this.math = "";
+                MyCalc.this.math.equals("");
             } else if (MyCalc.this.math.equals("÷") ) {
                 var10000 = MyCalc.this;
                 var10000.result /= MyCalc.this.num;
