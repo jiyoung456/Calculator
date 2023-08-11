@@ -375,8 +375,6 @@ public class MyCalc extends JFrame {
 
 
 
-
-
             /*수정: 3줄 묶고 소수 10자리까지만 출력되는거도 추가
             * var10000 = MyCalc.this;
                 var10000.result += MyCalc.this.num;
@@ -388,6 +386,7 @@ public class MyCalc extends JFrame {
                 String formattedResult = String.format("%.10f", result);
 
             }*/
+
 
             if (MyCalc.this.math.equals("+")) {
                 result += MyCalc.this.num;
