@@ -16,8 +16,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import calculate.*;
 
-public class MyCalc extends JFrame {
+public class Calculator extends JFrame {
     static JLabel label;
     static JLabel info;
     double result = 0.0;
@@ -25,7 +26,7 @@ public class MyCalc extends JFrame {
     double num = 0.0;
     String tostring = "";
 
-    public MyCalc() {
+    public Calculator() {
         this.setTitle("계산기");
         this.setDefaultCloseOperation(3);
         Container MyCon = this.getContentPane();
@@ -42,7 +43,7 @@ public class MyCalc extends JFrame {
         this.setVisible(true);
     }
 
-    public double MyCalc(String ss) {
+    public double Calculator(String ss) {
         return 0.0;
     }
 
@@ -55,7 +56,7 @@ public class MyCalc extends JFrame {
     }
 
     public static void main(String[] args) {
-        new MyCalc();
+        new Calculator();
     }
 
     class DownPanel extends JPanel {
@@ -98,23 +99,23 @@ public class MyCalc extends JFrame {
                     bt[i].addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
                             JButton b = (JButton)e.getSource();
-                            if (MyCalc.label.getText() == "0") {
-                                MyCalc.label.setText("");
+                            if (Calculator.label.getText() == "0") {
+                                Calculator.label.setText("");
                             }
 
-                            String labeltext = MyCalc.label.getText();
+                            String labeltext = Calculator.label.getText();
                             String text = b.getText();
                             String newtext = labeltext + text;
                             int n = newtext.length();
                             if (n <= 10) {
-                                MyCalc.label.setText(newtext);
+                                Calculator.label.setText(newtext);
                             }
 
-                            if (MyCalc.info.getText().contains("=")) {
-                                MyCalc.info.setText("");
-                                MyCalc.label.setText(b.getText());
-                                MyCalc.this.result = 0.0;
-                                MyCalc.this.num = 0.0;
+                            if (Calculator.info.getText().contains("=")) {
+                                Calculator.info.setText("");
+                                Calculator.label.setText(b.getText());
+                                Calculator.this.result = 0.0;
+                                Calculator.this.num = 0.0;
                             }
 
                         }
@@ -123,13 +124,13 @@ public class MyCalc extends JFrame {
                     bt[i].addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
                             JButton b = (JButton)e.getSource();
-                            String labeltext = MyCalc.label.getText();
+                            String labeltext = Calculator.label.getText();
                             String text = b.getText();
                             String newtext = labeltext + text;
                             if (labeltext.equals("0")) {
-                                MyCalc.label.setText(text);
+                                Calculator.label.setText(text);
                             } else {
-                                MyCalc.label.setText(newtext);
+                                Calculator.label.setText(newtext);
                             }
 
                         }
@@ -139,34 +140,34 @@ public class MyCalc extends JFrame {
                 else if (i == 23) {
                     bt[i].setBackground(new Color(0, 103, 192));
                     bt[i].setForeground(Color.WHITE);
-                    bt[i].addActionListener(MyCalc.this.new Result());
+                    bt[i].addActionListener(Calculator.this.new Result());
 
                 }else if (i % 4 == 3 || i < 7 || 19 < i) {
                     bt[i].setBackground(new Color(238, 238, 238));
                     if (i == 2) {
                         bt[i].addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
-                                int n = MyCalc.label.getText().length();
+                                int n = Calculator.label.getText().length();
                                 if (n >= 0) {
-                                    MyCalc.label.setText("0");
-                                    MyCalc.info.setText("");
+                                    Calculator.label.setText("0");
+                                    Calculator.info.setText("");
                                 }
 
-                                MyCalc.this.result = 0.0;
+                                Calculator.this.result = 0.0;
                             }
                         });
                     }else if(i == 3) {
                         bt[i].addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
-                                String labeltext = MyCalc.label.getText();
+                                String labeltext = Calculator.label.getText();
                                 int n = labeltext.length();
 
                                 if (n > 0) {
-                                    MyCalc.label.setText(labeltext.substring(0, n - 1));
+                                    Calculator.label.setText(labeltext.substring(0, n - 1));
                                 }
 
-                                if (MyCalc.label.getText().isEmpty()) {
-                                    MyCalc.label.setText("0");
+                                if (Calculator.label.getText().isEmpty()) {
+                                    Calculator.label.setText("0");
                                 }
                             }
                         });
@@ -174,13 +175,13 @@ public class MyCalc extends JFrame {
                     else if (i == 1) {
                         bt[i].addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
-                                int n = MyCalc.label.getText().length();
+                                int n = Calculator.label.getText().length();
                                 if (n > 0) {
-                                    MyCalc.this.setBackSpace(MyCalc.this.getBackSpace().substring(0, MyCalc.this.getBackSpace().length() - 1));
+                                    Calculator.this.setBackSpace(Calculator.this.getBackSpace().substring(0, Calculator.this.getBackSpace().length() - 1));
                                 }
 
-                                if (MyCalc.label.getText() == "") {
-                                    MyCalc.label.setText("0");
+                                if (Calculator.label.getText() == "") {
+                                    Calculator.label.setText("0");
                                 }
 
                             }
@@ -189,18 +190,18 @@ public class MyCalc extends JFrame {
                         bt[i].addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
                                 JButton b = (JButton)e.getSource();
-                                String labeltext = MyCalc.label.getText();
+                                String labeltext = Calculator.label.getText();
                                 String text = b.getText();
 
                                 if (!labeltext.contains(".")) {
                                     String newtext = labeltext + text;
-                                    MyCalc.label.setText(newtext);
+                                    Calculator.label.setText(newtext);
                                 }
 
                             }
                         });
                     } else {
-                        bt[i].addActionListener(MyCalc.this.new Result());
+                        bt[i].addActionListener(Calculator.this.new Result());
                     }
                 }
 
@@ -349,7 +350,7 @@ public class MyCalc extends JFrame {
 
         public void actionPerformed(ActionEvent e) {
             JButton b = (JButton)e.getSource();
-            String labeltext = MyCalc.label.getText();
+            String labeltext = Calculator.label.getText();
             String text = b.getText();
             String newtext = labeltext + text;
             int n = newtext.length();
@@ -358,14 +359,14 @@ public class MyCalc extends JFrame {
                 num = Double.parseDouble(label.getText().substring(0, n - 1));
             }
 
-            MyCalc var10000;
+            Calculator var10000;
 
 
 
             /*수정: 3줄 묶고 소수 10자리까지만 출력되는거도 추가
-            * var10000 = MyCalc.this;
-                var10000.result += MyCalc.this.num;
-                MyCalc.this.math.equals("");
+            * var10000 = Calculator.this;
+                var10000.result += Calculator.this.num;
+                Calculator.this.math.equals("");
                  */
           /*  if (result % 1 == 0) {
                 result = result;
@@ -375,36 +376,36 @@ public class MyCalc extends JFrame {
             }*/
 
 
-            if (MyCalc.this.math.equals("+")) {
-                result += MyCalc.this.num;
-            } else if (MyCalc.this.math.equals("-")) {
-                result -= MyCalc.this.num;
-            } else if (MyCalc.this.math.equals("×")) {
-                result *= MyCalc.this.num;
-            } else if (MyCalc.this.math.equals("÷")) {
-                result /= MyCalc.this.num;
+            if (Calculator.this.math.equals("+")) {
+                result += Calculator.this.num;
+            } else if (Calculator.this.math.equals("-")) {
+                result -= Calculator.this.num;
+            } else if (Calculator.this.math.equals("×")) {
+                result *= Calculator.this.num;
+            } else if (Calculator.this.math.equals("÷")) {
+                result /= Calculator.this.num;
             }
 
-            MyCalc.this.math = "";
+            Calculator.this.math = "";
 
-            if (MyCalc.this.math.equals("")) {
-                MyCalc.this.math = b.getText();
+            if (Calculator.this.math.equals("")) {
+                Calculator.this.math = b.getText();
             }
 
 
-            if (MyCalc.info.getText() == "" && !text.equals("=") && !text.equals("x²") && !text.equals("1/x") && !text.equals("2√x") && (!text.equals("+/-")) && !text.equals("%")) {
-                MyCalc.info.setText(newtext);
-                MyCalc.this.result = MyCalc.this.num;
-                MyCalc.label.setText("0");
-            } else if (MyCalc.info.getText() != "" && !text.equals("=") && !text.equals("x²") && !text.equals("1/x") && !text.equals("2√x") && (!text.equals("+/-")) && !text.equals("%")) {
-                MyCalc.this.result = (double)Math.round(MyCalc.this.result * 1.0E9) / 1.0E9;
-                if (MyCalc.this.result % 1.0 == 0.0) {
-                    int var10001 = (int)MyCalc.this.result;
-                    MyCalc.info.setText("" + var10001 + text);
-                    MyCalc.label.setText("0");
+            if (Calculator.info.getText() == "" && !text.equals("=") && !text.equals("x²") && !text.equals("1/x") && !text.equals("2√x") && (!text.equals("+/-")) && !text.equals("%")) {
+                Calculator.info.setText(newtext);
+                Calculator.this.result = Calculator.this.num;
+                Calculator.label.setText("0");
+            } else if (Calculator.info.getText() != "" && !text.equals("=") && !text.equals("x²") && !text.equals("1/x") && !text.equals("2√x") && (!text.equals("+/-")) && !text.equals("%")) {
+                Calculator.this.result = (double)Math.round(Calculator.this.result * 1.0E9) / 1.0E9;
+                if (Calculator.this.result % 1.0 == 0.0) {
+                    int var10001 = (int) Calculator.this.result;
+                    Calculator.info.setText("" + var10001 + text);
+                    Calculator.label.setText("0");
                 } else {
-                    MyCalc.info.setText(MyCalc.this.result + text);
-                    MyCalc.label.setText("0");
+                    Calculator.info.setText(Calculator.this.result + text);
+                    Calculator.label.setText("0");
                 }
             }
 
@@ -447,24 +448,24 @@ public class MyCalc extends JFrame {
             }
 
             else if(text.equals("%")) {
-                calculatePercentage();
+                CalculatePercentage.calculatePercentage(label, info, result);
             }
 
             if (text.equals("=")) {
-                MyCalc.this.math = "";
-                if (MyCalc.info.getText() != "" && MyCalc.label.getText() != "" && !MyCalc.info.getText().contains(text)) {
+                Calculator.this.math = "";
+                if (Calculator.info.getText() != "" && Calculator.label.getText() != "" && !Calculator.info.getText().contains(text)) {
                     JLabel var7;
                     String var8;
-                    if (MyCalc.this.result % 1.0 == 0.0) {
-                        var7 = MyCalc.info;
-                        var8 = MyCalc.info.getText();
-                        var7.setText(var8 + MyCalc.label.getText() + text);
-                        MyCalc.label.setText(String.valueOf((int)MyCalc.this.result));
+                    if (Calculator.this.result % 1.0 == 0.0) {
+                        var7 = Calculator.info;
+                        var8 = Calculator.info.getText();
+                        var7.setText(var8 + Calculator.label.getText() + text);
+                        Calculator.label.setText(String.valueOf((int) Calculator.this.result));
                     } else {
-                        var7 = MyCalc.info;
-                        var8 = MyCalc.info.getText();
-                        var7.setText(var8 + MyCalc.label.getText() + text);
-                        MyCalc.label.setText(String.valueOf(MyCalc.this.result));
+                        var7 = Calculator.info;
+                        var8 = Calculator.info.getText();
+                        var7.setText(var8 + Calculator.label.getText() + text);
+                        Calculator.label.setText(String.valueOf(Calculator.this.result));
                     }
                 }
             }
