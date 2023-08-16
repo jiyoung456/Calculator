@@ -220,33 +220,7 @@ public class Calculator extends JFrame {
         private void calculateSquare() {
 
         }
-
-
-        private void calculateRoot(){
-            num = Double.parseDouble(label.getText());
-            math = "";
-            if (info.getText().equals("")) {
-
-                result = (Math.round((Math.sqrt(num))*1000000000)/1000000000.0);
-                if(result % 1 == 0) {
-                    info.setText("√(" + (int) num + ")");
-                    label.setText(String.valueOf((int) result));
-                }else {
-                    info.setText("√(" + num + ")");
-                    label.setText(String.valueOf(result));
-                }
-            }else {
-                if(Math.sqrt(result) % 1 == 0) {
-                    info.setText("√(" + (int) result + ")");
-                    result = (Math.round((Math.sqrt(result))*1000000000)/1000000000.0);
-                    label.setText(String.valueOf((int) result));
-                }else {
-                    info.setText("√(" + result + ")");
-                    result = (Math.round((Math.sqrt(result))*1000000000)/1000000000.0);
-                    label.setText(String.valueOf(result));
-                }
-            }
-        }
+        
 
         /*
  0.2, 1+1, 1+1.1
@@ -436,7 +410,7 @@ public class Calculator extends JFrame {
 
 
             else if (text.equals("2√x")) {
-                calculateRoot();
+                CalculateRoot.calculateRoot(label, info, result);
             }
 
             else if (text.equals("1/x")) {
@@ -470,6 +444,9 @@ public class Calculator extends JFrame {
                 }
             }
 
+        }
+
+        private void calculateRoot() {
         }
     }
 }
