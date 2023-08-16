@@ -120,6 +120,7 @@ public class Calculator extends JFrame {
 
                         }
                     });
+
                 } else if (i == 21) {
                     bt[i].addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
@@ -156,6 +157,7 @@ public class Calculator extends JFrame {
                                 Calculator.this.result = 0.0;
                             }
                         });
+
                     }else if(i == 3) {
                         bt[i].addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
@@ -172,6 +174,7 @@ public class Calculator extends JFrame {
                             }
                         });
                     }
+
                     else if (i == 1) {
                         bt[i].addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
@@ -186,6 +189,7 @@ public class Calculator extends JFrame {
 
                             }
                         });
+
                     } else if (i == 22) {
                         bt[i].addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
@@ -197,17 +201,15 @@ public class Calculator extends JFrame {
                                     String newtext = labeltext + text;
                                     Calculator.label.setText(newtext);
                                 }
-
                             }
                         });
+
                     } else {
                         bt[i].addActionListener(Calculator.this.new Result());
                     }
                 }
-
                 this.add(bt[i]);
             }
-
         }
     }
 
@@ -215,44 +217,6 @@ public class Calculator extends JFrame {
         public Result() {
         }
         DecimalFormat df = new DecimalFormat("#.##########");
-
-
-        private void calculateSquare() {
-
-        }
-
-
-        /*
-2, 0.2, 1+1, 1+1.1
-정수 입력값이 info에 실수로 출력(label 결과값이 실수라서)
-*/
-        private void calculatePercentage() {
-            num = Double.parseDouble(label.getText());
-            math = "";
-
-            double percentage = num * 0.01;
-
-            if (info.getText().equals("")) {
-                if (percentage % 1 == 0) {
-                    info.setText((int) num + "%");
-                    label.setText(String.valueOf((int) percentage));
-                } else {
-                    info.setText(num + "%");
-                    label.setText(String.valueOf(percentage));
-                }
-            } else {
-                if (percentage % 1 == 0) {
-                    info.setText((int) num + "%");
-                    result = percentage;
-                    label.setText(String.valueOf((int) percentage));
-                } else {
-                    info.setText(num + "%");
-                    result = percentage;
-                    label.setText(String.valueOf(percentage));
-                }
-            }
-        }
-
 
         public void actionPerformed(ActionEvent e) {
             JButton b = (JButton)e.getSource();
@@ -266,21 +230,6 @@ public class Calculator extends JFrame {
             }
 
             Calculator var10000;
-
-
-
-            /*수정: 3줄 묶고 소수 10자리까지만 출력되는거도 추가
-            * var10000 = Calculator.this;
-                var10000.result += Calculator.this.num;
-                Calculator.this.math.equals("");
-                 */
-          /*  if (result % 1 == 0) {
-                result = result;
-            } else {
-                String formattedResult = String.format("%.10f", result);
-
-            }*/
-
 
             if (Calculator.this.math.equals("+")) {
                 result += Calculator.this.num;
@@ -298,7 +247,6 @@ public class Calculator extends JFrame {
                 Calculator.this.math = b.getText();
             }
 
-
             if (Calculator.info.getText() == "" && !text.equals("=") && !text.equals("x²") && !text.equals("1/x") && !text.equals("2√x") && (!text.equals("+/-")) && !text.equals("%")) {
                 Calculator.info.setText(newtext);
                 Calculator.this.result = Calculator.this.num;
@@ -309,6 +257,7 @@ public class Calculator extends JFrame {
                     int var10001 = (int) Calculator.this.result;
                     Calculator.info.setText("" + var10001 + text);
                     Calculator.label.setText("0");
+
                 } else {
                     Calculator.info.setText(Calculator.this.result + text);
                     Calculator.label.setText("0");
@@ -339,7 +288,6 @@ public class Calculator extends JFrame {
                     }
                 }
             }
-
 
             else if (text.equals("2√x")) {
                 CalculateRoot.calculateRoot(label, info, result);
@@ -375,10 +323,6 @@ public class Calculator extends JFrame {
                     }
                 }
             }
-
-        }
-
-        private void calculateRoot() {
         }
     }
 }
