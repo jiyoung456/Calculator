@@ -220,76 +220,8 @@ public class Calculator extends JFrame {
         private void calculateSquare() {
 
         }
-        
-
-        /*
- 0.2, 1+1, 1+1.1
-정수 입력값이 info에 실수로 출력(label 결과값이 실수라서)
-*/
-        private void calculateInverse() {
-            num = Double.parseDouble(label.getText());
-            math = "";
-
-            if (num == 0) {
-                info.setText("Cannot divide by zero");
-                label.setText("Error");
-            } else {
-
-                if (info.getText().equals("")) {
-
-                    result = (((1 / num) * 1000000000) / 1000000000.0);
-                    if (result % 1 == 0) {
-                        // info.setText("1/(" + (int) num + ")");
-                        info.setText("1/(" +  num + ")");
-                        label.setText(String.valueOf((int) result));
-                    } else {
-                        info.setText("1/(" + num + ")");
-                        label.setText(String.valueOf(result));
-                    }
-                } else {
-
-                    if (result % 1 == 0) {
-                        info.setText("1/(" + (int) result + ")");
-                        result = (((1 / result) * 1000000000) / 1000000000.0);
-                        label.setText(String.valueOf((int) result));
-                    } else {
-                        info.setText("1/(" + result + ")");
-                        result = (((1 / result) * 1000000000) / 1000000000.0);
-                        label.setText(String.valueOf(result));
-                    }
-                }
-
-            }
-        }
 
 
-
-
-        private void calculateNegation() {
-            num = Double.parseDouble(label.getText());
-            math = "";
-
-            if (info.getText().equals("")) {
-                result = -num;
-                if (result % 1 == 0) {
-                    info.setText("negate(" + (int) num + ")");
-                    label.setText(String.valueOf((int) result));
-                } else {
-                    info.setText("negate(" + num + ")");
-                    label.setText(String.valueOf(result));
-                }
-            } else {
-                if (result % 1 == 0) {
-                    info.setText("negate(" + (int) result + ")");
-                    result = -result;
-                    label.setText(String.valueOf((int) result));
-                } else {
-                    info.setText("negate(" + result + ")");
-                    result = -result;
-                    label.setText(String.valueOf(result));
-                }
-            }
-        }
         /*
 2, 0.2, 1+1, 1+1.1
 정수 입력값이 info에 실수로 출력(label 결과값이 실수라서)
@@ -414,14 +346,14 @@ public class Calculator extends JFrame {
             }
 
             else if (text.equals("1/x")) {
-                calculateInverse();
+                CalculateInverse.calculateInverse(label, info, result);
             }
 
             else if (text.equals("+/-")) {
-                calculateNegation();
+                CalculateNegation.calculateNegation(label, info, result);
             }
 
-            else if(text.equals("%")) {
+            else if (text.equals("%")) {
                 CalculatePercentage.calculatePercentage(label, info, result);
             }
 
