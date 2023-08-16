@@ -31,8 +31,11 @@ public class MyCalc extends JFrame {
         Container MyCon = this.getContentPane();
         MyCon.setLayout(new BorderLayout(5, 5));
         MyCon.setBackground(new Color(238, 238, 238));
+
+        //상단 패널
         UpPanel UP = new UpPanel();
         MyCon.add(UP, "East");
+
         DownPanel DP = new DownPanel();
         MyCon.add(DP, "South");
         this.setSize(350, 600);
@@ -53,22 +56,6 @@ public class MyCalc extends JFrame {
 
     public static void main(String[] args) {
         new MyCalc();
-    }
-
-    class UpPanel extends JPanel {
-        public UpPanel() {
-            this.setLayout(new GridLayout(3, 1));
-            MyCalc.info = new JLabel("");
-            MyCalc.label = new JLabel("0");
-            MyCalc.info.setFont(new Font("맑은 고딕", 0, 15));
-            MyCalc.info.setForeground(Color.darkGray);
-            MyCalc.info.setHorizontalAlignment(4);
-            MyCalc.label.setFont(new Font("맑은 고딕", 0, 45));
-            MyCalc.label.setForeground(Color.BLACK);
-            MyCalc.label.setHorizontalAlignment(4);
-            this.add(MyCalc.info);
-            this.add(MyCalc.label);
-        }
     }
 
     class DownPanel extends JPanel {
@@ -277,7 +264,7 @@ public class MyCalc extends JFrame {
 
                     result = (((1 / num) * 1000000000) / 1000000000.0);
                     if (result % 1 == 0) {
-                       // info.setText("1/(" + (int) num + ")");
+                        // info.setText("1/(" + (int) num + ")");
                         info.setText("1/(" +  num + ")");
                         label.setText(String.valueOf((int) result));
                     } else {
