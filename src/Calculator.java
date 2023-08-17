@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import calculate.*;
 
+
 public class Calculator extends JFrame {
     static JLabel label;
     static JLabel info;
@@ -34,7 +35,7 @@ public class Calculator extends JFrame {
 
         //상단 패널
         UpPanel UP = new UpPanel();
-        MyCon.add(UP, "East");
+        MyCon.add(UP,  "East");
 
         DownPanel DP = new DownPanel();
         MyCon.add(DP, "South");
@@ -209,6 +210,7 @@ public class Calculator extends JFrame {
         }
     }
 
+
     public class Result implements ActionListener {
         public Result() {
         }
@@ -302,28 +304,11 @@ public class Calculator extends JFrame {
             }
 
             if (text.equals("=")) {
-                Calculator.this.math = "";
-
-                Calculator.this.result = Math.round(Calculator.this.result * 10000000000.0) / 10000000000.0;
-
-                if (Calculator.info.getText() != "" && Calculator.label.getText() != "" && !Calculator.info.getText().contains(text)) {
-                    JLabel var7;
-                    String var8;
-                    if (Calculator.this.result % 1.0 == 0.0) {
-                        var7 = Calculator.info;
-                        var8 = Calculator.info.getText();
-                        var7.setText(var8 + Calculator.label.getText() + text);
-                        Calculator.label.setText(String.valueOf((int) Calculator.this.result));
-                    } else {
-                        var7 = Calculator.info;
-                        var8 = Calculator.info.getText();
-                        var7.setText(var8 + Calculator.label.getText() + text);
-                        Calculator.label.setText(String.valueOf(Calculator.this.result));
-                    }
+                CalculateEquals.CalculateEquals(label, info, result, e);
                 }
             }
         }
-    } public static void main(String[] args) {
+    public static void main(String[] args) {
         new Calculator();
     }
 
