@@ -1,18 +1,15 @@
-/*
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Locale;
 
+public class DownPanel extends JPanel {
+    double result = 0.0;
+    String math = "";
+    double num = 0.0;
 
-class DownPanel extends JPanel {
-    private Calculator calculator;
-
-    double result;
-    double num;
-
-    public DownPanel(Calculator calculator) {
-        this.calculator = calculator;
+    public DownPanel() {
         JButton[] bt = new JButton[24];
         this.setLayout(new GridLayout(6, 4, 5, 5));
         this.setBackground(new Color(238, 238, 238));
@@ -93,7 +90,7 @@ class DownPanel extends JPanel {
             else if (i == 23) {
                 bt[i].setBackground(new Color(0, 103, 192));
                 bt[i].setForeground(Color.WHITE);
-                bt[i].addActionListener(new Result());
+                bt[i].addActionListener(Result());
 
             }else if (i % 4 == 3 || i < 7 || 19 < i) {
                 bt[i].setBackground(new Color(238, 238, 238));
@@ -130,15 +127,19 @@ class DownPanel extends JPanel {
                 else if (i == 1) {
                     bt[i].addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
-                            int n = calculator.label.getText().length();
+                            int n = Calculator.label.getText().length();
                             if (n > 0) {
-                                calculator.setBackSpace(calculator.getBackSpace().substring(0, calculator.getBackSpace().length() - 1));
+                                setLocale(Locale.forLanguageTag(getBackSpace().substring(0, getBackSpace().length() - 1)));
                             }
 
-                            if (calculator.label.getText().equals("")) {
-                                calculator.label.setText("0");
+                            if (Calculator.label.getText() == "") {
+                                Calculator.label.setText("0");
                             }
 
+                        }
+
+                        private String getBackSpace() {
+                            return null;
                         }
                     });
 
@@ -157,10 +158,15 @@ class DownPanel extends JPanel {
                     });
 
                 } else {
-                    bt[i].addActionListener(new Result());
+                    bt[i].addActionListener(Result());
                 }
             }
             this.add(bt[i]);
         }
     }
-}*/
+
+    private ActionListener Result() {
+        ActionListener o = null;
+        return o;
+    }
+}

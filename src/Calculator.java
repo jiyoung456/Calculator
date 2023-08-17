@@ -24,7 +24,6 @@ public class Calculator extends JFrame {
     double result = 0.0;
     String math = "";
     double num = 0.0;
-    String tostring = "";
 
     public Calculator() {
         this.setTitle("계산기");
@@ -55,9 +54,6 @@ public class Calculator extends JFrame {
         return label.getText();
     }
 
-    public static void main(String[] args) {
-        new Calculator();
-    }
 
     class DownPanel extends JPanel {
         public DownPanel() {
@@ -327,5 +323,8 @@ public class Calculator extends JFrame {
                 }
             }
         }
+    } public static void main(String[] args) {
+        new Calculator();
     }
+
 }
