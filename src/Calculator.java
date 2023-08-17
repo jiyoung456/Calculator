@@ -307,6 +307,9 @@ public class Calculator extends JFrame {
 
             if (text.equals("=")) {
                 Calculator.this.math = "";
+
+                Calculator.this.result = Math.round(Calculator.this.result * 10000000000.0) / 10000000000.0;
+
                 if (Calculator.info.getText() != "" && Calculator.label.getText() != "" && !Calculator.info.getText().contains(text)) {
                     JLabel var7;
                     String var8;

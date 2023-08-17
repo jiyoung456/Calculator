@@ -12,24 +12,15 @@ public class CalculateInverse {
             label.setText("Error");
         } else {
             if (info.getText().equals("")) {
-                result = (((1 / num) * 1000000000) / 1000000000.0);
-                if (result % 1 == 0) {
-                    info.setText("1/(" +  num + ")");
-                    label.setText(String.valueOf((int) result));
-                } else {
-                    info.setText("1/(" + num + ")");
-                    label.setText(String.valueOf(result));
-                }
+                result = 1.0 / num;
+                result = Math.round(result * 10000000000.0) / 10000000000.0;
+                info.setText("1/(" + num + ")");
+                label.setText(String.valueOf(result));
             } else {
-                if (result % 1 == 0) {
-                    info.setText("1/(" + (int) result + ")");
-                    result = (((1 / result) * 1000000000) / 1000000000.0);
-                    label.setText(String.valueOf((int) result));
-                } else {
-                    info.setText("1/(" + result + ")");
-                    result = (((1 / result) * 1000000000) / 1000000000.0);
-                    label.setText(String.valueOf(result));
-                }
+                result = 1.0 / result;
+                result = Math.round(result * 10000000000.0) / 10000000000.0;
+                info.setText("1/(" + result + ")");
+                label.setText(String.valueOf(result));
             }
         }
     }
