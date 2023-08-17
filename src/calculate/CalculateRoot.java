@@ -18,14 +18,19 @@ public class CalculateRoot {
         }else {
             if(Math.sqrt(result) % 1 == 0) {
                 info.setText("√(" + (int) result + ")");
-                result = (Math.round((Math.sqrt(result))*1000000000)/1000000000.0);
+                result = (round(result));
                 label.setText(String.valueOf((int) result));
             }else {
                 info.setText("√(" + result + ")");
-                result = (Math.round((Math.sqrt(result))*1000000000)/1000000000.0);
+                result = (round(result));
                 label.setText(String.valueOf(result));
             }
         }
+    }
+
+    public static double round(double result) {
+        result = Math.round((Math.sqrt(result))*1000000000)/1000000000.0;
+        return result;
     }
 
 }
