@@ -199,6 +199,7 @@ public class Calculator extends JFrame {
         public Result() {
         }
         DecimalFormat df = new DecimalFormat("#.##########");
+        String labelText;
 
         public void actionPerformed(ActionEvent e) {
             JButton b = (JButton)e.getSource();
@@ -228,7 +229,6 @@ public class Calculator extends JFrame {
             if (Calculator.this.math.equals("")) {
                 Calculator.this.math = b.getText();
             }
-
             if (Calculator.info.getText() == "" && !text.equals("=") && !text.equals("x²") && !text.equals("1/x") && !text.equals("2√x") && (!text.equals("+/-")) && !text.equals("%")) {
                 Calculator.info.setText(newText);
                 Calculator.this.result = Calculator.this.num;
@@ -244,9 +244,10 @@ public class Calculator extends JFrame {
                     Calculator.label.setText("0");
                 }
             }
-
             if (text.equals("x²")) {
                 CalculateSquare.calculateSquare(label, info, result, e);
+                double squareResult = Double.parseDouble(labelText) * Double.parseDouble(labelText);
+                Calculator.label.setText(df.format(squareResult));
             }
             else if (text.equals("2√x")) {
                 CalculateRoot.calculateRoot(label, info, result);
