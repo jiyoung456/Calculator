@@ -14,6 +14,5 @@ class UpPanel extends JPanel {
         Calculator.label.setHorizontalAlignment(4);
         this.add(Calculator.info);
         this.add(Calculator.label);
-
     }
 }

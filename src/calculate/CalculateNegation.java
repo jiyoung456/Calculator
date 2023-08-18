@@ -4,7 +4,6 @@ import javax.swing.*;
 public class CalculateNegation{
         public static void calculateNegation(JLabel label, JLabel info, double result) {
             double num = Double.parseDouble(label.getText());
-            String math = "";
 
         if (info.getText().equals("")) {
             result = -num;

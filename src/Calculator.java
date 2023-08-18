@@ -42,10 +42,6 @@ public class Calculator extends JFrame {
         this.setVisible(true);
     }
 
-    public double Calculator(String ss) {
-        return 0.0;
-    }
-
     private void setBackSpace(String bs) {
         label.setText(bs);
     }
@@ -185,7 +181,6 @@ public class Calculator extends JFrame {
                                 }
                             }
                         });
-
                     } else {
                         bt[i].addActionListener(Calculator.this.new Result());
                     }
@@ -198,8 +193,6 @@ public class Calculator extends JFrame {
     public class Result implements ActionListener {
         public Result() {
         }
-        DecimalFormat df = new DecimalFormat("#.##########");
-        String labelText;
 
         public void actionPerformed(ActionEvent e) {
             JButton b = (JButton)e.getSource();
@@ -245,9 +238,7 @@ public class Calculator extends JFrame {
                 }
             }
             if (text.equals("x²")) {
-                double squareResult = Double.parseDouble(labelText) * Double.parseDouble(labelText);
-                Calculator.label.setText(df.format(squareResult));
-                Calculator.info.setText("");
+                CalculateSquare.calculateSquare(label, info, result, e);
             }
             else if (text.equals("2√x")) {
                 CalculateRoot.calculateRoot(label, info, result);
@@ -261,6 +252,7 @@ public class Calculator extends JFrame {
             else if (text.equals("%")) {
                 CalculatePercentage.calculatePercentage(label, info, result);
             }
+            else
             if (text.equals("=")) {
                 CalculateEquals.CalculateEquals(label, info, result, e);
             }

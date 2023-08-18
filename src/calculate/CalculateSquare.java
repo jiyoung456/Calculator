@@ -6,10 +6,10 @@ import java.awt.event.ActionEvent;
 public class CalculateSquare {
     public static void calculateSquare(JLabel label, JLabel info, double result, ActionEvent e) {
         JButton b = (JButton) e.getSource();
-        String labeltext = label.getText();
+        String labeTtext = label.getText();
         String text = b.getText();
-        String newtext = labeltext + text;
-        int n = newtext.length();
+        String newText = labeTtext + text;
+        int n = newText.length();
         double num = Double.parseDouble(label.getText().substring(0, n - 2));
         String math = "";
 

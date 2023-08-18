@@ -5,7 +5,6 @@ public class CalculatePercentage {
     public static void calculatePercentage(JLabel label, JLabel info, double result) {
         double num = Double.parseDouble(label.getText());
         double percentage = num * 0.01;
-        String math = "";
 
         if (info.getText().equals("")) {
             if (percentage % 1 == 0) {
