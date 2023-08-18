@@ -6,8 +6,7 @@ public class CalculateRoot {
         double num = Double.parseDouble(label.getText());
 
         if (info.getText().equals("")) {
-            result = (Math.round((Math.sqrt(num))*1000000000)/1000000000.0);
-
+            result = (Math.round((Math.sqrt(num))*1_000_000_000)/1_000_000_000.0);
             if(result % 1 == 0) {
                 info.setText("√(" + (int) num + ")");
                 label.setText(String.valueOf((int) result));
@@ -29,8 +28,7 @@ public class CalculateRoot {
     }
 
     public static double root(double result) {
-        result = Math.round((Math.sqrt(result))*1000000000)/1000000000.0;
+        result = Math.round((Math.sqrt(result))*1_000_000_000)/1_000_000_000.0;
         return result;
     }
-
 }
