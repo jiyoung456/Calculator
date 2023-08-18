@@ -234,7 +234,7 @@ public class Calculator extends JFrame {
                 Calculator.this.result = Calculator.this.num;
                 Calculator.label.setText("0");
             } else if (Calculator.info.getText() != "" && !text.equals("=") && !text.equals("x²") && !text.equals("1/x") && !text.equals("2√x") && (!text.equals("+/-")) && !text.equals("%")) {
-                Calculator.this.result = (double)Math.round(Calculator.this.result * 1.0E9) / 1.0E9;
+                Calculator.this.result = (double)Math.round(Calculator.this.result * 1_000_000_000) / 1_000_000_000.0;
                 if (Calculator.this.result % 1.0 == 0.0) {
                     int var10001 = (int) Calculator.this.result;
                     Calculator.info.setText("" + var10001 + text);
@@ -245,9 +245,9 @@ public class Calculator extends JFrame {
                 }
             }
             if (text.equals("x²")) {
-                CalculateSquare.calculateSquare(label, info, result, e);
                 double squareResult = Double.parseDouble(labelText) * Double.parseDouble(labelText);
                 Calculator.label.setText(df.format(squareResult));
+                Calculator.info.setText("");
             }
             else if (text.equals("2√x")) {
                 CalculateRoot.calculateRoot(label, info, result);
