@@ -1,8 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -11,7 +6,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DecimalFormat;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -26,6 +20,7 @@ public class Calculator extends JFrame {
     double num = 0.0;
 
     public Calculator() {
+        //레이아웃
         this.setTitle("계산기");
         this.setDefaultCloseOperation(3);
         Container MyCon = this.getContentPane();
@@ -36,6 +31,7 @@ public class Calculator extends JFrame {
         UpPanel UP = new UpPanel();
         MyCon.add(UP,  "East");
 
+        //하단 패널
         DownPanel DP = new DownPanel();
         MyCon.add(DP, "South");
         this.setSize(350, 600);
@@ -50,7 +46,7 @@ public class Calculator extends JFrame {
         return label.getText();
     }
 
-    class DownPanel extends JPanel {
+    class DownPanel extends JPanel { //버튼
         public DownPanel() {
             JButton[] bt = new JButton[24];
             this.setLayout(new GridLayout(6, 4, 5, 5));
@@ -80,22 +76,30 @@ public class Calculator extends JFrame {
             bt[22] = new JButton(".");
             bt[23] = new JButton("=");
 
-            for(int i = 0; i <= 23; i++) {
+            for(int i = 0; i <= 23; i++) { //모든 버튼 레이아웃
                 bt[i].setPreferredSize(new Dimension(0, 65));
                 bt[i].setFont(new Font("맑은 고딕", 0, 20));
                 bt[i].setForeground(Color.BLACK);
                 bt[i].setBackground(Color.white);
 
-                if (7 < i && i < 19 && i%4 != 3) {
+                if (7 < i && i < 19 && i%4 != 3) { //1-9, 0을 제외한 숫자
                     bt[i].addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
-                            JButton b = (JButton)e.getSource();
+                            JButton b = (JButton)e.getSource(); //숫자 누르면 b = 숫자
                             if (Calculator.label.getText() == "0") {
                                 Calculator.label.setText("");
                             }
                             String labelText = Calculator.label.getText();
+                            if (labelText == "") {
+                                labelText = "0";
+                            }
+
                             String text = b.getText();
-                            String newText = labelText + text;
+                            String newText = text;
+
+                            //String newText = String.valueOf(Integer.parseInt(labelText) + Integer.parseInt(text));
+
+
                             int n = newText.length();
                             if (n <= 10) {
                                 Calculator.label.setText(newText);
@@ -108,7 +112,7 @@ public class Calculator extends JFrame {
                             }
                         }
                     });
-                } else if (i == 21) {
+                } else if (i == 21) { //0
                     bt[i].addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
                             JButton b = (JButton)e.getSource();
@@ -123,14 +127,14 @@ public class Calculator extends JFrame {
                         }
                     });
                 }
-                else if (i == 23) {
+                else if (i == 23) { //=
                     bt[i].setBackground(new Color(0, 103, 192));
                     bt[i].setForeground(Color.WHITE);
                     bt[i].addActionListener(Calculator.this.new Result());
 
                 }else if (i % 4 == 3 || i < 7 || 19 < i) {
                     bt[i].setBackground(new Color(238, 238, 238));
-                    if (i == 2) {
+                    if (i == 2) { //c
                         bt[i].addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
                                 int n = Calculator.label.getText().length();
@@ -141,7 +145,7 @@ public class Calculator extends JFrame {
                                 Calculator.this.result = 0.0;
                             }
                         });
-                    }else if(i == 3) {
+                    }else if(i == 3) { //<<
                         bt[i].addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
                                 String labelText = Calculator.label.getText();
@@ -156,7 +160,7 @@ public class Calculator extends JFrame {
                             }
                         });
                     }
-                    else if (i == 1) {
+                    else if (i == 1) { //ce
                         bt[i].addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
                                 int n = Calculator.label.getText().length();
@@ -168,7 +172,7 @@ public class Calculator extends JFrame {
                                 }
                             }
                         });
-                    } else if (i == 22) {
+                    } else if (i == 22) { //.
                         bt[i].addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
                                 JButton b = (JButton)e.getSource();
@@ -181,7 +185,7 @@ public class Calculator extends JFrame {
                                 }
                             }
                         });
-                    } else {
+                    } else { //특수기호4개, 사칙연산, +/-, =
                         bt[i].addActionListener(Calculator.this.new Result());
                     }
                 }
@@ -198,7 +202,11 @@ public class Calculator extends JFrame {
             JButton b = (JButton)e.getSource();
             String labelText = Calculator.label.getText();
             String text = b.getText();
+
             String newText = labelText + text;
+            //String newText = (Integer.parseInt(labelText) + Integer.parseInt(text)) + "";
+
+
             int n = newText.length();
 
             if (!text.equals("x²") && !text.equals("1/x") && !text.equals("2√x") && (!text.equals("+/-")) && !text.equals("%")) {
@@ -219,22 +227,32 @@ public class Calculator extends JFrame {
 
             Calculator.this.math = "";
 
-            if (Calculator.this.math.equals("")) {
-                Calculator.this.math = b.getText();
+
+
+            if (Calculator.this.math.equals("")) { //math 빈 값이면
+                Calculator.this.math = b.getText(); //math = 버튼을 누른 값
             }
-            if (Calculator.info.getText() == "" && !text.equals("=") && !text.equals("x²") && !text.equals("1/x") && !text.equals("2√x") && (!text.equals("+/-")) && !text.equals("%")) {
+
+            if (Calculator.info.getText() == "" && !text.equals("=") && !text.equals("x²") && !text.equals("1/x")
+                    && !text.equals("2√x") && (!text.equals("+/-")) && !text.equals("%")) { //info 빈 창
                 Calculator.info.setText(newText);
                 Calculator.this.result = Calculator.this.num;
-                Calculator.label.setText("0");
-            } else if (Calculator.info.getText() != "" && !text.equals("=") && !text.equals("x²") && !text.equals("1/x") && !text.equals("2√x") && (!text.equals("+/-")) && !text.equals("%")) {
+                //Calculator.label.setText("0");
+
+
+
+
+            } else if (Calculator.info.getText() != "" && !text.equals("=") && !text.equals("x²") && !text.equals("1/x")
+                    && !text.equals("2√x") && (!text.equals("+/-")) && !text.equals("%")) { //info 빈 창 아님
                 Calculator.this.result = (double)Math.round(Calculator.this.result * 1_000_000_000) / 1_000_000_000.0;
                 if (Calculator.this.result % 1.0 == 0.0) {
+
                     int var10001 = (int) Calculator.this.result;
                     Calculator.info.setText("" + var10001 + text);
-                    Calculator.label.setText("0");
+                    //Calculator.label.setText("0");
                 } else {
                     Calculator.info.setText(Calculator.this.result + text);
-                    Calculator.label.setText("0");
+                    //Calculator.label.setText("0");
                 }
             }
             if (text.equals("x²")) {
@@ -262,3 +280,16 @@ public class Calculator extends JFrame {
         new Calculator();
     }
 }
+
+/*
+System.out.println("---------------------");
+        System.out.println("*********************************************************************");
+        System.out.println("labelText: " + labelText);
+        System.out.println("text: " + text);
+        System.out.println("*********************************************************************");
+
+System.out.println("==========================================================================");
+                            System.out.println("labelText: " + labelText);
+                            System.out.println("text: " + text);
+                            System.out.println("newText: " + newText);
+ */
