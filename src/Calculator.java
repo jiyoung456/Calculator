@@ -20,6 +20,7 @@ public class Calculator extends JFrame {
     double result = 0.0;
     String math = "";
     double num = 0.0;
+    String lastPressedButtonText = "";
 
     public Calculator() {
         //레이아웃
@@ -163,25 +164,23 @@ public class Calculator extends JFrame {
                     else if (i == 1) { //ce
                         bt[i].addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
-                                //
+
+                                System.out.println("==========================================================================");
+                                System.out.println("text: " + text);
+
                                 int n = Calculator.label.getText().length();
                                 if (n > 0) {  //if (Calculator.label.getText() != "") //빈 문자열인지 체크하는 코드, 공백도 빈 문자로 인식
                                     Calculator.this.setBackSpace(Calculator.this.getBackSpace().substring(0, Calculator.this.getBackSpace().length() - 1));
                                 }
-
                                 //ce누르고 빈 창일때, label에 0
-                                if (Calculator.label.getText() == "") {
+                                if (Calculator.label.getText().equals("")) {
                                     Calculator.label.setText("0");
-                                }
-
-                                /*
-                                if (text.equals("=")) {
+                                } //=누르고 ce 누르면 info 초기화, label 0
+                                if (lastPressedButtonText.equals("=")) {
                                     Calculator.label.setText("0");
                                     Calculator.info.setText("");
                                     Calculator.this.result = 0.0;
                                 }
-
-                                 */
                             }
                         });
                     } else if (i == 22) { //.
@@ -216,6 +215,7 @@ public class Calculator extends JFrame {
             String text = b.getText();
 
             String newText = labelText + text;
+            lastPressedButtonText = text;
             //String newText = (Integer.parseInt(labelText) + Integer.parseInt(text)) + "";
 
 
@@ -247,22 +247,12 @@ public class Calculator extends JFrame {
 
             if (Calculator.info.getText() == "" && !text.equals("=") && !text.equals("x²") && !text.equals("1/x")
                     && !text.equals("2√x") && (!text.equals("+/-")) && !text.equals("%")) { //info 빈 창
-                System.out.println("1");
                 Calculator.info.setText(newText);
                 Calculator.this.result = Calculator.this.num;
                 //Calculator.label.setText("0");
-                System.out.println("빈창********************************************************************");
-                System.out.println("labelText: " + labelText);
-                System.out.println("text: " + text);
-                System.out.println("NewText: " + newText);
 
             } else if (Calculator.info.getText() != "" && !text.equals("=") && !text.equals("x²") && !text.equals("1/x")
                     && !text.equals("2√x") && (!text.equals("+/-")) && !text.equals("%")) { //info 빈 창 아님
-                System.out.println("2");
-                System.out.println("빈창아님********************************************************************");
-                System.out.println("labelText: " + labelText);
-                System.out.println("text: " + text);
-                System.out.println("NewText: " + newText);
                 Calculator.this.result = (double)Math.round(Calculator.this.result * 1_000_000_000) / 1_000_000_000.0;
                 if (Calculator.this.result % 1.0 == 0.0) {
                     int var10001 = (int) Calculator.this.result;
@@ -277,10 +267,6 @@ public class Calculator extends JFrame {
                 CalculateSquare.calculateSquare(label, info, result, e);
             }
             else if (text.equals("2√x")) {
-                System.out.println("==========================================================================");
-                System.out.println("labelText: " + labelText);
-                System.out.println("text: " + text);
-                System.out.println("newText: " + newText);
                 CalculateRoot.calculateRoot(label, info, result);
             }
             else if (text.equals("1/x")) {
@@ -294,11 +280,11 @@ public class Calculator extends JFrame {
             }
             else
             if (text.equals("=")) {
-                CalculateEquals.CalculateEquals(label, info, result, e);
                 System.out.println("==========================================================================");
                 System.out.println("labelText: " + labelText);
                 System.out.println("text: " + text);
                 System.out.println("newText: " + newText);
+                CalculateEquals.CalculateEquals(label, info, result, e);
             }
         }
     }
