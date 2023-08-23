@@ -100,6 +100,13 @@ public class Calculator extends JFrame {
                             String text = b.getText();
                             String newText = text;
 
+                            System.out.println("숫자=======================================================================");
+                            System.out.println("num: " + num);
+                            System.out.println("result: " + result);
+                            System.out.println("labelText: " + labelText);
+                            System.out.println("text: " + text);
+                            System.out.println("newText: " + newText);
+
                             //String newText = String.valueOf(Integer.parseInt(labelText) + Integer.parseInt(text));
 
 
@@ -140,7 +147,7 @@ public class Calculator extends JFrame {
                     if (i == 2) { //c
                         bt[i].addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
-                               // int n = Calculator.label.getText().length();
+                                // int n = Calculator.label.getText().length();
                                 Calculator.label.setText("0");
                                 Calculator.info.setText("");
                                 Calculator.this.result = 0.0;
@@ -222,6 +229,12 @@ public class Calculator extends JFrame {
             int n = newText.length();
 
             if (!text.equals("x²") && !text.equals("1/x") && !text.equals("2√x") && (!text.equals("+/-")) && !text.equals("%")) {
+                System.out.println("연산기호=======================================================================");
+                System.out.println("num: " + num);
+                System.out.println("result: " + result);
+                System.out.println("labelText: " + labelText);
+                System.out.println("text: " + text);
+                System.out.println("newText: " + newText);
                 num = Double.parseDouble(label.getText().substring(0, n - 1));
             }
 
@@ -229,6 +242,12 @@ public class Calculator extends JFrame {
 
             if (Calculator.this.math.equals("+")) {
                 result += Calculator.this.num;
+                System.out.println("드ㅓ하기 연산========================================================================");
+                System.out.println("num: " + num);
+                System.out.println("result: " + result);
+                System.out.println("labelText: " + labelText);
+                System.out.println("text: " + text);
+                System.out.println("newText: " + newText);
             } else if (Calculator.this.math.equals("-")) {
                 result -= Calculator.this.num;
             } else if (Calculator.this.math.equals("×")) {
@@ -268,6 +287,12 @@ public class Calculator extends JFrame {
             }
             else if (text.equals("2√x")) {
                 CalculateRoot.calculateRoot(label, info, result);
+                System.out.println("루트========================================================================");
+                System.out.println("num: " + num);
+                System.out.println("result: " + result);
+                System.out.println("labelText: " + labelText);
+                System.out.println("text: " + text);
+                System.out.println("newText: " + newText);
             }
             else if (text.equals("1/x")) {
                 CalculateInverse.calculateInverse(label, info, result);
@@ -280,7 +305,9 @@ public class Calculator extends JFrame {
             }
             else
             if (text.equals("=")) {
-                System.out.println("==========================================================================");
+                System.out.println("는========================================================================");
+                System.out.println("num: " + num);
+                System.out.println("result: " + result);
                 System.out.println("labelText: " + labelText);
                 System.out.println("text: " + text);
                 System.out.println("newText: " + newText);
@@ -301,7 +328,10 @@ System.out.println("---------------------");
         System.out.println("*********************************************************************");
 
 System.out.println("==========================================================================");
+                            System.out.println("num: " + num);
+                            System.out.println("result: " + result);
                             System.out.println("labelText: " + labelText);
                             System.out.println("text: " + text);
                             System.out.println("newText: " + newText);
+
  */
