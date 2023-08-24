@@ -141,12 +141,10 @@ public class Calculator extends JFrame {
                             }
                         }
                     });
-                }
-                else if (i == 27) { //=
+                } else if (i == 27) { //=
                     bt[i].setBackground(new Color(0, 103, 192));
                     bt[i].setForeground(Color.WHITE);
                     bt[i].addActionListener(Calculator.this.new Result());
-
                 } else if (i % 4 == 3 || i < 7 || 19 < i) {
                     bt[i].setBackground(new Color(238, 238, 238));
                     if (i == 6) { //c
@@ -208,7 +206,12 @@ public class Calculator extends JFrame {
                                 }
                             }
                         });
-                    } else { //특수기호4개, 사칙연산, +/-, =
+                    } else if (i == 1) { //(
+
+                    } else if (i == 1) { //)
+
+                    }
+                    else { //특수기호4개, 사칙연산, +/-, =
                         bt[i].addActionListener(Calculator.this.new Result());
                     }
                 }
