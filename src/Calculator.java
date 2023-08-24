@@ -37,7 +37,7 @@ public class Calculator extends JFrame {
         //하단 패널
         DownPanel DP = new DownPanel();
         MyCon.add(DP, "South");
-        this.setSize(350, 600);
+        this.setSize(350, 650);
         this.setVisible(true);
     }
 
@@ -51,41 +51,46 @@ public class Calculator extends JFrame {
 
     class DownPanel extends JPanel { //버튼
         public DownPanel() {
-            JButton[] bt = new JButton[24];
-            this.setLayout(new GridLayout(6, 4, 5, 5));
+            JButton[] bt = new JButton[28];
+            this.setLayout(new GridLayout(7, 4, 5, 5));
             this.setBackground(new Color(238, 238, 238));
-            bt[0] = new JButton("%");
-            bt[1] = new JButton("CE");
-            bt[2] = new JButton("C");
-            bt[3] = new JButton("<<");
-            bt[4] = new JButton("1/x");
-            bt[5] = new JButton("x²");
-            bt[6] = new JButton("2√x");
-            bt[7] = new JButton("÷");
-            bt[8] = new JButton("7");
-            bt[9] = new JButton("8");
-            bt[10] = new JButton("9");
-            bt[11] = new JButton("×");
-            bt[12] = new JButton("4");
-            bt[13] = new JButton("5");
-            bt[14] = new JButton("6");
-            bt[15] = new JButton("-");
-            bt[16] = new JButton("1");
-            bt[17] = new JButton("2");
-            bt[18] = new JButton("3");
-            bt[19] = new JButton("+");
-            bt[20] = new JButton("+/-");
-            bt[21] = new JButton("0");
-            bt[22] = new JButton(".");
-            bt[23] = new JButton("=");
+            bt[0] = new JButton("");
+            bt[1] = new JButton("(");
+            bt[2] = new JButton(")");
+            bt[3]= new JButton("");
+            bt[4] = new JButton("%");
+            bt[5] = new JButton("CE");
+            bt[6] = new JButton("C");
+            bt[7] = new JButton("<<");
+            bt[8] = new JButton("1/x");
+            bt[9] = new JButton("x²");
+            bt[10] = new JButton("2√x");
+            bt[11] = new JButton("÷");
+            bt[12] = new JButton("7");
+            bt[13] = new JButton("8");
+            bt[14] = new JButton("9");
+            bt[15] = new JButton("×");
+            bt[16] = new JButton("4");
+            bt[17] = new JButton("5");
+            bt[18] = new JButton("6");
+            bt[19] = new JButton("-");
+            bt[20] = new JButton("1");
+            bt[21] = new JButton("2");
+            bt[22] = new JButton("3");
+            bt[23] = new JButton("+");
+            bt[24] = new JButton("+/-");
+            bt[25] = new JButton("0");
+            bt[26] = new JButton(".");
+            bt[27] = new JButton("=");
 
-            for(int i = 0; i <= 23; i++) { //모든 버튼 레이아웃
+
+            for(int i = 0; i <= 27; i++) { //모든 버튼 레이아웃
                 bt[i].setPreferredSize(new Dimension(0, 65));
                 bt[i].setFont(new Font("맑은 고딕", 0, 20));
                 bt[i].setForeground(Color.BLACK);
                 bt[i].setBackground(Color.white);
 
-                if (7 < i && i < 19 && i%4 != 3) { //1-9, 0을 제외한 숫자
+                if (11 < i && i < 23 && i%4 != 3) { //1-9, 0을 제외한 숫자
                     bt[i].addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
                             JButton b = (JButton)e.getSource(); //숫자 누르면 b = 숫자
@@ -122,7 +127,7 @@ public class Calculator extends JFrame {
                             }
                         }
                     });
-                } else if (i == 21) { //0
+                } else if (i == 25) { //0
                     bt[i].addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
                             JButton b = (JButton)e.getSource();
@@ -137,14 +142,14 @@ public class Calculator extends JFrame {
                         }
                     });
                 }
-                else if (i == 23) { //=
+                else if (i == 27) { //=
                     bt[i].setBackground(new Color(0, 103, 192));
                     bt[i].setForeground(Color.WHITE);
                     bt[i].addActionListener(Calculator.this.new Result());
 
                 } else if (i % 4 == 3 || i < 7 || 19 < i) {
                     bt[i].setBackground(new Color(238, 238, 238));
-                    if (i == 2) { //c
+                    if (i == 6) { //c
                         bt[i].addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
                                 // int n = Calculator.label.getText().length();
@@ -153,7 +158,7 @@ public class Calculator extends JFrame {
                                 Calculator.this.result = 0.0;
                             }
                         });
-                    } else if(i == 3) { //<<
+                    } else if(i == 7) { //<<
                         bt[i].addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
                                 String labelText = Calculator.label.getText();
@@ -168,7 +173,7 @@ public class Calculator extends JFrame {
                             }
                         });
                     }
-                    else if (i == 1) { //ce
+                    else if (i == 5) { //ce
                         bt[i].addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
 
@@ -190,7 +195,7 @@ public class Calculator extends JFrame {
                                 }
                             }
                         });
-                    } else if (i == 22) { //.
+                    } else if (i == 26) { //.
                         bt[i].addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
                                 JButton b = (JButton)e.getSource();
@@ -220,7 +225,6 @@ public class Calculator extends JFrame {
             JButton b = (JButton)e.getSource();
             String labelText = Calculator.label.getText();
             String text = b.getText();
-
             String newText = labelText + text;
             lastPressedButtonText = text;
             //String newText = (Integer.parseInt(labelText) + Integer.parseInt(text)) + "";
@@ -296,6 +300,12 @@ public class Calculator extends JFrame {
             }
             else if (text.equals("1/x")) {
                 CalculateInverse.calculateInverse(label, info, result);
+                System.out.println("역수========================================================================");
+                System.out.println("num: " + num);
+                System.out.println("result: " + result);
+                System.out.println("labelText: " + labelText);
+                System.out.println("text: " + text);
+                System.out.println("newText: " + newText);
             }
             else if (text.equals("+/-")) {
                 CalculateNegation.calculateNegation(label, info, result);
