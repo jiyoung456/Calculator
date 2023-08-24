@@ -170,8 +170,7 @@ public class Calculator extends JFrame {
                                 }
                             }
                         });
-                    }
-                    else if (i == 5) { //ce
+                    } else if (i == 5) { //ce
                         bt[i].addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
 
@@ -206,12 +205,18 @@ public class Calculator extends JFrame {
                                 }
                             }
                         });
-                    } else if (i == 1) { //(
-
-                    } else if (i == 1) { //)
-
-                    }
-                    else { //특수기호4개, 사칙연산, +/-, =
+                    } /*else if (i == 1) { //(
+                        bt[i].addActionListener(new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                }
+                        });
+                    } else if (i == 2) { //)
+                        bt[i].addActionListener(new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                            }
+                        });
+                    }*/
+                     else { //특수기호4개, 사칙연산, +/-, =
                         bt[i].addActionListener(Calculator.this.new Result());
                     }
                 }
