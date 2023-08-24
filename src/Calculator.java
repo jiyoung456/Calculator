@@ -105,13 +105,6 @@ public class Calculator extends JFrame {
                             String text = b.getText();
                             String newText = text;
 
-                            System.out.println("숫자=======================================================================");
-                            System.out.println("num: " + num);
-                            System.out.println("result: " + result);
-                            System.out.println("labelText: " + labelText);
-                            System.out.println("text: " + text);
-                            System.out.println("newText: " + newText);
-
                             //String newText = String.valueOf(Integer.parseInt(labelText) + Integer.parseInt(text));
 
 
@@ -173,10 +166,6 @@ public class Calculator extends JFrame {
                     } else if (i == 5) { //ce
                         bt[i].addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
-
-                                System.out.println("==========================================================================");
-                                System.out.println("text: " + text);
-
                                 int n = Calculator.label.getText().length();
                                 if (n > 0) {  //if (Calculator.label.getText() != "") //빈 문자열인지 체크하는 코드, 공백도 빈 문자로 인식
                                     Calculator.this.setBackSpace(Calculator.this.getBackSpace().substring(0, Calculator.this.getBackSpace().length() - 1));
@@ -215,8 +204,8 @@ public class Calculator extends JFrame {
                             public void actionPerformed(ActionEvent e) {
                             }
                         });
-                    }*/
-                     else { //특수기호4개, 사칙연산, +/-, =
+                    } */
+                    else { //특수기호4개, 사칙연산, +/-, =
                         bt[i].addActionListener(Calculator.this.new Result());
                     }
                 }
@@ -241,12 +230,6 @@ public class Calculator extends JFrame {
             int n = newText.length();
 
             if (!text.equals("x²") && !text.equals("1/x") && !text.equals("2√x") && (!text.equals("+/-")) && !text.equals("%")) {
-                System.out.println("연산기호=======================================================================");
-                System.out.println("num: " + num);
-                System.out.println("result: " + result);
-                System.out.println("labelText: " + labelText);
-                System.out.println("text: " + text);
-                System.out.println("newText: " + newText);
                 num = Double.parseDouble(label.getText().substring(0, n - 1));
             }
 
@@ -254,12 +237,6 @@ public class Calculator extends JFrame {
 
             if (Calculator.this.math.equals("+")) {
                 result += Calculator.this.num;
-                System.out.println("드ㅓ하기 연산========================================================================");
-                System.out.println("num: " + num);
-                System.out.println("result: " + result);
-                System.out.println("labelText: " + labelText);
-                System.out.println("text: " + text);
-                System.out.println("newText: " + newText);
             } else if (Calculator.this.math.equals("-")) {
                 result -= Calculator.this.num;
             } else if (Calculator.this.math.equals("×")) {
@@ -299,21 +276,9 @@ public class Calculator extends JFrame {
             }
             else if (text.equals("2√x")) {
                 CalculateRoot.calculateRoot(label, info, result);
-                System.out.println("루트========================================================================");
-                System.out.println("num: " + num);
-                System.out.println("result: " + result);
-                System.out.println("labelText: " + labelText);
-                System.out.println("text: " + text);
-                System.out.println("newText: " + newText);
             }
             else if (text.equals("1/x")) {
                 CalculateInverse.calculateInverse(label, info, result);
-                System.out.println("역수========================================================================");
-                System.out.println("num: " + num);
-                System.out.println("result: " + result);
-                System.out.println("labelText: " + labelText);
-                System.out.println("text: " + text);
-                System.out.println("newText: " + newText);
             }
             else if (text.equals("+/-")) {
                 CalculateNegation.calculateNegation(label, info, result);
@@ -323,12 +288,6 @@ public class Calculator extends JFrame {
             }
             else
             if (text.equals("=")) {
-                System.out.println("는========================================================================");
-                System.out.println("num: " + num);
-                System.out.println("result: " + result);
-                System.out.println("labelText: " + labelText);
-                System.out.println("text: " + text);
-                System.out.println("newText: " + newText);
                 CalculateEquals.CalculateEquals(label, info, result, e);
             }
         }
