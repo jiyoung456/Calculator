@@ -84,7 +84,7 @@ public class Calculator extends JFrame {
             bt[27] = new JButton("=");
 
 
-            for(int i = 0; i <= 27; i++) { //모든 버튼 레이아웃
+            for (int i = 0; i <= 27; i++) { //모든 버튼 레이아웃
                 bt[i].setPreferredSize(new Dimension(0, 65));
                 bt[i].setFont(new Font("맑은 고딕", 0, 20));
                 bt[i].setForeground(Color.BLACK);
@@ -226,7 +226,6 @@ public class Calculator extends JFrame {
             lastPressedButtonText = text;
             //String newText = (Integer.parseInt(labelText) + Integer.parseInt(text)) + "";
 
-
             int n = newText.length();
 
             if (!text.equals("x²") && !text.equals("1/x") && !text.equals("2√x") && (!text.equals("+/-")) && !text.equals("%")) {
@@ -251,9 +250,7 @@ public class Calculator extends JFrame {
 
             if (Calculator.this.math.equals("")) { //math 빈 값이면
                 Calculator.this.math = b.getText(); //math = 버튼을 누른 값
-            }
-
-            if (Calculator.info.getText() == "" && !text.equals("=") && !text.equals("x²") && !text.equals("1/x")
+            } if (Calculator.info.getText() == "" && !text.equals("=") && !text.equals("x²") && !text.equals("1/x")
                     && !text.equals("2√x") && (!text.equals("+/-")) && !text.equals("%")) { //info 빈 창
                 Calculator.info.setText(newText);
                 Calculator.this.result = Calculator.this.num;
@@ -270,24 +267,17 @@ public class Calculator extends JFrame {
                     Calculator.info.setText(Calculator.this.result + text);
                     //Calculator.label.setText("0");
                 }
-            }
-            if (text.equals("x²")) {
+            } if (text.equals("x²")) {
                 CalculateSquare.calculateSquare(label, info, result, e);
-            }
-            else if (text.equals("2√x")) {
+            } else if (text.equals("2√x")) {
                 CalculateRoot.calculateRoot(label, info, result);
-            }
-            else if (text.equals("1/x")) {
+            } else if (text.equals("1/x")) {
                 CalculateInverse.calculateInverse(label, info, result);
-            }
-            else if (text.equals("+/-")) {
+            } else if (text.equals("+/-")) {
                 CalculateNegation.calculateNegation(label, info, result);
-            }
-            else if (text.equals("%")) {
+            } else if (text.equals("%")) {
                 CalculatePercentage.calculatePercentage(label, info, result);
-            }
-            else
-            if (text.equals("=")) {
+            } else if (text.equals("=")) {
                 CalculateEquals.CalculateEquals(label, info, result, e);
             }
         }
