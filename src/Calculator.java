@@ -203,7 +203,12 @@ public class Calculator extends JFrame {
                                 JButton b = (JButton)e.getSource();
                                 String labelText = Calculator.label.getText();
                                 String text = b.getText();
+                                if (!labelText.contains("(")) {
+                                    String newText = labelText + text;
+                                    System.out.println("newtext" + newText);
+                                    Calculator.info.setText(newText);
                                 }
+                            }
                         });
                     } else if (i == 2) { //)
                         bt[i].addActionListener(new ActionListener() {
