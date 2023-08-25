@@ -4,7 +4,6 @@ import javax.swing.JLabel;
 public class CalculateInverse {
     public static void calculateInverse(JLabel label, JLabel info, double result) {
         double num = Double.parseDouble(label.getText());
-        String math = "";
 
         if (num == 0) {
             info.setText("Cannot divide by zero");

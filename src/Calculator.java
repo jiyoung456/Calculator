@@ -89,20 +89,21 @@ public class Calculator extends JFrame {
                     bt[i].addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
                             JButton b = (JButton)e.getSource(); //숫자 누르면 b = 숫자
-                            if (Calculator.label.getText() == "0") {
+                            String labelText = Calculator.label.getText();
+                            String text = b.getText();
+                            String newText = text;
+                            int n = newText.length();
+
+                            if (Calculator.label.getText().equals("0")) {
                                 Calculator.label.setText("");
                             }
-                            String labelText = Calculator.label.getText();
+
                             if (labelText == "") {
                                 labelText = "0";
                             }
 
-                            String text = b.getText();
-                            String newText = text;
-
                             //String newText = String.valueOf(Integer.parseInt(labelText) + Integer.parseInt(text));
 
-                            int n = newText.length();
                             if (n <= 10) {
                                 Calculator.label.setText(newText);
                             }
@@ -221,7 +222,6 @@ public class Calculator extends JFrame {
                 num = Double.parseDouble(label.getText().substring(0, n - 1));
             }
 
-            Calculator var10000;
 
             if (Calculator.this.math.equals("+")) {
                 result += Calculator.this.num;
@@ -250,7 +250,8 @@ public class Calculator extends JFrame {
                 Calculator.this.result = (double)Math.round(Calculator.this.result * 1_000_000_000) / 1_000_000_000.0;
                 if (Calculator.this.result % 1.0 == 0.0) {
                     int var10001 = (int) Calculator.this.result;
-                    Calculator.info.setText("" + var10001 + text);
+                    Calculator.info.setText( var10001 + text);
+
                     //Calculator.label.setText("0");
                 } else {
                     Calculator.info.setText(Calculator.this.result + text);
