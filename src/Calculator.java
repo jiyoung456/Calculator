@@ -93,12 +93,18 @@ public class Calculator extends JFrame {
                 if (11 < i && i < 23 && i%4 != 3) { //1-9, 0을 제외한 숫자
                     bt[i].addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
+
                             JButton b = (JButton)e.getSource(); //숫자 누르면 b = 숫자
                             String text = b.getText();
                             String newText = text;
                             String labelText = Calculator.label.getText();
                             int n = newText.length();
                             //String newText = String.valueOf(Integer.parseInt(labelText) + Integer.parseInt(text));
+
+                            System.out.println("숫자===========");
+                            System.out.println("text:" + text );
+                            System.out.println("math:" + math );
+                            System.out.println("result:" + result );
 
                             if (Calculator.label.getText() == "0") {
                                 Calculator.label.setText("");
@@ -194,11 +200,17 @@ public class Calculator extends JFrame {
                     } else if (i == 1) { //(
                         bt[i].addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
+                                JButton b = (JButton)e.getSource();
+                                String labelText = Calculator.label.getText();
+                                String text = b.getText();
                                 }
                         });
                     } else if (i == 2) { //)
                         bt[i].addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
+                                JButton b = (JButton)e.getSource();
+                                String labelText = Calculator.label.getText();
+                                String text = b.getText();
                             }
                         });
                     } else { //특수기호4개, 사칙연산, +/-, =
@@ -222,7 +234,29 @@ public class Calculator extends JFrame {
             lastPressedButtonText = text;
             //String newText = (Integer.parseInt(labelText) + Integer.parseInt(text)) + "";
 
+            if (text.equals("(")) {
+
+                System.out.println("(===========");
+                System.out.println("text:" + text );
+                System.out.println("math:" + math );
+                System.out.println("result:" + result );
+
+                num = Double.parseDouble(label.getText());
+                math = "";
+                labelText = "";
+            } else if (text.equals(")")) {
+                performMathOperation(); // 괄호 내 연산 수행
+                math = "";
+                num = result;
+            } else {
+                int n = newText.length();
+                num = Double.parseDouble(label.getText().substring(0, n - 1));
+                performMathOperation();
+                math = text;
+            }
+
             int n = newText.length();
+
 
             if (!text.equals("x²") && !text.equals("1/x") && !text.equals("2√x") && (!text.equals("+/-")) && !text.equals("%")) {
                 num = Double.parseDouble(label.getText().substring(0, n - 1));
@@ -248,6 +282,13 @@ public class Calculator extends JFrame {
                 Calculator.this.math = b.getText(); //math = 버튼을 누른 값
             } if (Calculator.info.getText() == "" && !text.equals("=") && !text.equals("x²") && !text.equals("1/x")
                     && !text.equals("2√x") && (!text.equals("+/-")) && !text.equals("%")) { //info 빈 창
+
+                System.out.println("연산===========");
+                System.out.println("text:" + text );
+                System.out.println("math:" + math );
+                System.out.println("result:" + result );
+
+
                 Calculator.info.setText(newText);
                 Calculator.this.result = Calculator.this.num;
                 //Calculator.label.setText("0");
@@ -255,6 +296,13 @@ public class Calculator extends JFrame {
             } else if (Calculator.info.getText() != "" && !text.equals("=") && !text.equals("x²") && !text.equals("1/x")
                     && !text.equals("2√x") && (!text.equals("+/-")) && !text.equals("%")) { //info 빈 창 아님
                 Calculator.this.result = (double)Math.round(Calculator.this.result * 1_000_000_000) / 1_000_000_000.0;
+
+                System.out.println("연산===========");
+                System.out.println("text:" + text);
+                System.out.println("math:" + math);
+                System.out.println("result:" + result);
+
+
                 if (Calculator.this.result % 1.0 == 0.0) {
                     int var10001 = (int) Calculator.this.result;
                     Calculator.info.setText("" + var10001 + text);
@@ -274,7 +322,24 @@ public class Calculator extends JFrame {
             } else if (text.equals("%")) {
                 CalculatePercentage.calculatePercentage(label, info, result);
             } else if (text.equals("=")) {
+
+                System.out.println("는===========");
+                System.out.println("text:" + text );
+                System.out.println("math:" + math );
+                System.out.println("result:" + result );
+
                 CalculateEquals.CalculateEquals(label, info, result, e);
+            }
+        }
+        private void performMathOperation() {
+            if (math.equals("+")) {
+                result += num;
+            } else if (math.equals("-")) {
+                result -= num;
+            } else if (math.equals("×")) {
+                result *= num;
+            } else if (math.equals("÷")) {
+                result /= num;
             }
         }
     }
