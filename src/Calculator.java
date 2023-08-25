@@ -94,21 +94,18 @@ public class Calculator extends JFrame {
                     bt[i].addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
                             JButton b = (JButton)e.getSource(); //숫자 누르면 b = 숫자
+                            String text = b.getText();
+                            String newText = text;
+                            String labelText = Calculator.label.getText();
+                            int n = newText.length();
+                            //String newText = String.valueOf(Integer.parseInt(labelText) + Integer.parseInt(text));
+
                             if (Calculator.label.getText() == "0") {
                                 Calculator.label.setText("");
                             }
-                            String labelText = Calculator.label.getText();
                             if (labelText == "") {
                                 labelText = "0";
                             }
-
-                            String text = b.getText();
-                            String newText = text;
-
-                            //String newText = String.valueOf(Integer.parseInt(labelText) + Integer.parseInt(text));
-
-
-                            int n = newText.length();
                             if (n <= 10) {
                                 Calculator.label.setText(newText);
                             }
@@ -194,7 +191,7 @@ public class Calculator extends JFrame {
                                 }
                             }
                         });
-                    } /*else if (i == 1) { //(
+                    } else if (i == 1) { //(
                         bt[i].addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
                                 }
@@ -204,8 +201,7 @@ public class Calculator extends JFrame {
                             public void actionPerformed(ActionEvent e) {
                             }
                         });
-                    } */
-                    else { //특수기호4개, 사칙연산, +/-, =
+                    } else { //특수기호4개, 사칙연산, +/-, =
                         bt[i].addActionListener(Calculator.this.new Result());
                     }
                 }
